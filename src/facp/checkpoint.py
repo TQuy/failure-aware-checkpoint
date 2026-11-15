@@ -175,12 +175,27 @@ class TwoPhaseCheckpointer(_Base):
         for old in sorted(self.dir.glob("ckpt-*.pt"))[: -self.keep]:
             old.unlink()
 
+    def _allocate(self) -> None:
+        """Allocate the page-locked buffers now, not inside the first save.
+
+        Pinning 9.5 GB takes several seconds. Doing it at start makes it part
+        of the restart time, where it belongs, instead of a one-off stall that
+        would distort the adaptive policies' stall estimate.
+        """
+        began = time.time()
+        self._copy(self.model.state_dict(), "model")
+        self._copy(self.optimizer.state_dict(), "optimizer")
+        if torch.cuda.is_available():
+            torch.cuda.synchronize()
+        self.record.write("allocate", seconds=time.time() - began)
+
     def restore(self) -> int:
         """Load the newest finished checkpoint; return its step (0 if none)."""
         began = time.time()
         info = self.manifest()
         if info is None:
-            self.record.write("restore", step=0, seconds=0.0, found=False)
+            self._allocate()
+            self.record.write("restore", step=0, seconds=time.time() - began, found=False)
             return 0
         path = self.dir / info["file"]
         ok = file_crc(path) == info["crc"]
@@ -190,9 +205,11 @@ class TwoPhaseCheckpointer(_Base):
         self.model.load_state_dict(state["model"])
         self.optimizer.load_state_dict(state["optimizer"])
         self.measured.load(state["measured"])
+        step = state["step"]
+        del state  # free the loaded copy before pinning a second one
+        self._allocate()
         seconds = time.time() - began
         self.measured.update("restore", seconds)
-        step = state["step"]
         self.record.write("restore", step=step, seconds=seconds, found=True, crc_ok=ok)
         self._plan_next(step)
         return step

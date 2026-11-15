@@ -90,8 +90,12 @@ def main(argv: list[str] | None = None) -> int:
 
     device = torch.device(args.device)
     tokens = load_tokens(args.model, Path(args.data_dir), args.seed)
+    # seeded, so a job killed before its first checkpoint restarts from the same weights
+    torch.manual_seed(args.seed)
     model = build_model(args.model, args.grad_ckpt).to(device)
-    optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr)
+    # foreach=False updates one tensor at a time; the default batched update
+    # needs about 3 GB of temporaries for GPT-2 large and does not fit a T4
+    optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr, foreach=False)
 
     ckpt = None
     step = 0
