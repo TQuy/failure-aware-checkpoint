@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# checkpoints and run output stay out of the repository
+checkpoints/
+results/raw/
+*.pt
+*.pt.tmp

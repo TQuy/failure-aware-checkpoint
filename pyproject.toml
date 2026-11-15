@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "failure-aware-checkpoint"
+version = "0.1.0"
+description = "Choose the checkpoint interval from the failure rate, not an overhead budget"
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "Nguyen The Quy" }]
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+train = ["torch>=2.4", "transformers>=4.44", "datasets>=2.20"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
