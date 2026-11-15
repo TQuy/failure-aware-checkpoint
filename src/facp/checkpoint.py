@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
 import threading
 import time
 import zlib
@@ -119,6 +120,7 @@ class TwoPhaseCheckpointer(_Base):
         self.keep = keep
         self._buffers: dict[str, torch.Tensor] = {}
         self._thread: threading.Thread | None = None
+        self._error: BaseException | None = None
         for stale in self.dir.glob("*.tmp"):
             stale.unlink()
 
@@ -143,6 +145,8 @@ class TwoPhaseCheckpointer(_Base):
         if self._thread is not None and self._thread.is_alive():
             self._thread.join()
             waited = time.time() - began
+        if self._error is not None:
+            raise RuntimeError("the previous checkpoint write failed") from self._error
         snapshot = {
             "model": self._copy(self.model.state_dict(), "model"),
             "optimizer": self._copy(self.optimizer.state_dict(), "optimizer"),
@@ -160,6 +164,13 @@ class TwoPhaseCheckpointer(_Base):
         self._plan_next(step)
 
     def _write(self, step: int, snapshot: dict) -> None:
+        try:
+            self._write_file(step, snapshot)
+        except BaseException as e:
+            self._error = e
+            raise
+
+    def _write_file(self, step: int, snapshot: dict) -> None:
         began = time.time()
         name = f"ckpt-{step:08d}.pt"
         tmp = self.dir / (name + ".tmp")
@@ -235,6 +246,16 @@ class DCPCheckpointer(_Base):
             os.environ.setdefault("MASTER_PORT", str(29500 + os.getpid() % 1000))
             dist.init_process_group("gloo", rank=0, world_size=1)
         self._future = None
+        # a kill during a write leaves a partial folder that no manifest names
+        self._remove_old(keep=(self.manifest() or {}).get("file"))
+
+    def _remove_old(self, keep: str | None) -> None:
+        """Delete every checkpoint folder except `keep`. DCP writes a new
+        folder per save and never deletes one, so without this a long run
+        fills the storage disk."""
+        for old in self.dir.glob("dcp-*"):
+            if old.name != keep:
+                shutil.rmtree(old, ignore_errors=True)
 
     def _state(self) -> dict:
         from torch.distributed.checkpoint.state_dict import get_state_dict
@@ -247,9 +268,13 @@ class DCPCheckpointer(_Base):
 
         began = time.time()
         waited = 0.0
-        if self._future is not None and not self._future.done():
+        if self._future is not None:
+            # result() also re-raises a failed write, so the run stops
+            # instead of training on without a checkpoint
+            pending = not self._future.done()
             self._future.result()
-            waited = time.time() - began
+            if pending:
+                waited = time.time() - began
         name = f"dcp-{step:08d}"
         write_began = time.time()
         self._writing.set()
@@ -263,6 +288,7 @@ class DCPCheckpointer(_Base):
             _write_json_atomic(self.dir / MANIFEST, {"step": step, "file": name, "measured": self.measured.state()})
             self._writing.clear()
             self._after_write(step, began, {})
+            self._remove_old(keep=name)
 
         future.add_done_callback(done)
         self._future = future

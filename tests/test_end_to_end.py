@@ -61,6 +61,10 @@ class EndToEnd(unittest.TestCase):
                     first[e["step"]] = e["loss"]
         # the four parts explain the lost time to within 10% of the run
         self.assertLess(abs(result["residual_s"]), 0.1 * result["wall_s"])
+        # old checkpoints are deleted, so a long run cannot fill the disk:
+        # one finished checkpoint, plus the write the final stop cut off
+        kept = [p for p in (tmp / "ckpt").iterdir() if p.name.startswith(("ckpt-", "dcp-"))]
+        self.assertLessEqual(len(kept), 2, kept)
 
     def test_two_phase_with_kills(self):
         tmp, result = self.run_policy("fixed:20", [12.0, 26.0])
