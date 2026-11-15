@@ -35,16 +35,25 @@ Every policy sees the same seeded failure times. Lost time is computed from the 
 | Part | Status |
 |---|---|
 | Cost model and interval rules (`src/facp/cost_model.py`) | Done; tests reproduce the proposal's estimate table |
-| Two-phase checkpoint library | In progress |
-| Failure injector and supervisor | In progress |
-| Lost-time accounting | In progress |
+| Two-phase checkpoint library and the DCP baseline (`src/facp/checkpoint.py`) | Done; tested with kills on a tiny model and on GPT-2 small on a GPU, every redone step reproduces its logged loss |
+| Failure injector and supervisor (`src/facp/supervisor.py`) | Done |
+| Lost-time accounting (`src/facp/accounting.py`) | Done; the four parts explain the measured loss to within a few seconds |
 | Baseline runs (GPT-2 large, one T4) | Planned for 20 November |
 
-## Running the tests
+## Running it
 
     python -m venv .venv && . .venv/bin/activate
-    pip install -e .
-    python -m unittest discover -s tests -v
+    pip install -e ".[train]"
+    python -m unittest discover -s tests -v      # about 2 minutes on a CPU
+
+One run: GPT-2 small, a checkpoint policy, kills at 60 and 150 seconds, then the accounting.
+
+    python -m facp.supervisor --duration 240 --record run/supervisor.jsonl --kill-at 60 150 -- \
+        python examples/train_gpt2.py --model gpt2 --policy failure-aware:3600 \
+            --ckpt-dir run/ckpt --record run/train.jsonl --batch 2 --seq 256 --grad-ckpt
+    python -m facp.accounting run/
+
+Policies: `none`, `fixed:N` (every N steps), `dcp:N` (PyTorch Distributed Checkpoint `async_save` every N steps), `checkfreq:BUDGET` (for example `checkfreq:0.01`), `failure-aware:MTBF_SECONDS`. With `--mtbf` and `--seed` instead of `--kill-at`, the supervisor draws the kill times, and the same seed gives the same times for every policy.
 
 ## Licence
 
