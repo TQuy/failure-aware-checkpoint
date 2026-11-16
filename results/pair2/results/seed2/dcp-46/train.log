@@ -1,0 +1,1065 @@
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+Exception in worker
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 83, in _worker
+    work_item.run()
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 60, in run
+    self.future.set_exception(exc)
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 567, in set_exception
+    self._invoke_callbacks()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 342, in _invoke_callbacks
+    callback(self)
+  File "/home/quynt/facp/src/facp/checkpoint.py", line 262, in done
+    fut.result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/_async_thread_executor.py", line 31, in save_wrapper
+    return save(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 475, in inner_func
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 193, in save
+    return _save_state_dict(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 479, in _save_state_dict
+    metadata = distW.all_reduce("write", write_data, finish_checkpoint)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 259, in all_reduce
+    raise final_result
+torch.distributed.checkpoint.api.CheckpointException: CheckpointException ranks:dict_keys([0])
+Traceback (most recent call last): (RANK 0)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 239, in all_reduce
+    local_data = map_fun()
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 467, in write_data
+    all_writes = storage_writer.write_data(final_local_plan, planner)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 702, in write_data
+    return self._write_data(planner, file_queue)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 730, in _write_data
+    _write_files_from_queue(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 414, in _write_files_from_queue
+    with create_stream(file_name, "wb") as stream:
+  File "/usr/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 513, in create_stream
+    with path.open(mode) as stream:
+OSError: [Errno 28] No space left on device
+
+Exception in worker
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 83, in _worker
+    work_item.run()
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 60, in run
+    self.future.set_exception(exc)
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 567, in set_exception
+    self._invoke_callbacks()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 342, in _invoke_callbacks
+    callback(self)
+  File "/home/quynt/facp/src/facp/checkpoint.py", line 262, in done
+    fut.result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/_async_thread_executor.py", line 31, in save_wrapper
+    return save(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 475, in inner_func
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 193, in save
+    return _save_state_dict(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 456, in _save_state_dict
+    central_plan = distW.reduce_scatter("plan", local_step, global_step)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 219, in reduce_scatter
+    raise result
+torch.distributed.checkpoint.api.CheckpointException: CheckpointException ranks:dict_keys([0])
+Traceback (most recent call last): (RANK 0)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 192, in reduce_scatter
+    local_data = map_fun()
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 442, in local_step
+    local_plan = storage_writer.prepare_local_plan(local_plan)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 649, in prepare_local_plan
+    self.fs.mkdir(self.path)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 539, in mkdir
+    path.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.10/pathlib.py", line 1175, in mkdir
+    self._accessor.mkdir(self, mode)
+OSError: [Errno 28] No space left on device: '/mnt/store/ckpt-dcp-46/dcp-00000552'
+
+Exception in worker
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 83, in _worker
+    work_item.run()
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 60, in run
+    self.future.set_exception(exc)
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 567, in set_exception
+    self._invoke_callbacks()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 342, in _invoke_callbacks
+    callback(self)
+  File "/home/quynt/facp/src/facp/checkpoint.py", line 262, in done
+    fut.result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/_async_thread_executor.py", line 31, in save_wrapper
+    return save(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 475, in inner_func
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 193, in save
+    return _save_state_dict(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 456, in _save_state_dict
+    central_plan = distW.reduce_scatter("plan", local_step, global_step)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 219, in reduce_scatter
+    raise result
+torch.distributed.checkpoint.api.CheckpointException: CheckpointException ranks:dict_keys([0])
+Traceback (most recent call last): (RANK 0)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 192, in reduce_scatter
+    local_data = map_fun()
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 442, in local_step
+    local_plan = storage_writer.prepare_local_plan(local_plan)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 649, in prepare_local_plan
+    self.fs.mkdir(self.path)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 539, in mkdir
+    path.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.10/pathlib.py", line 1175, in mkdir
+    self._accessor.mkdir(self, mode)
+OSError: [Errno 28] No space left on device: '/mnt/store/ckpt-dcp-46/dcp-00000598'
+
+Exception in worker
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 83, in _worker
+    work_item.run()
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 60, in run
+    self.future.set_exception(exc)
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 567, in set_exception
+    self._invoke_callbacks()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 342, in _invoke_callbacks
+    callback(self)
+  File "/home/quynt/facp/src/facp/checkpoint.py", line 262, in done
+    fut.result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/_async_thread_executor.py", line 31, in save_wrapper
+    return save(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 475, in inner_func
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 193, in save
+    return _save_state_dict(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 456, in _save_state_dict
+    central_plan = distW.reduce_scatter("plan", local_step, global_step)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 219, in reduce_scatter
+    raise result
+torch.distributed.checkpoint.api.CheckpointException: CheckpointException ranks:dict_keys([0])
+Traceback (most recent call last): (RANK 0)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 192, in reduce_scatter
+    local_data = map_fun()
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 442, in local_step
+    local_plan = storage_writer.prepare_local_plan(local_plan)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 649, in prepare_local_plan
+    self.fs.mkdir(self.path)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 539, in mkdir
+    path.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.10/pathlib.py", line 1175, in mkdir
+    self._accessor.mkdir(self, mode)
+OSError: [Errno 28] No space left on device: '/mnt/store/ckpt-dcp-46/dcp-00000644'
+
+Exception in worker
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 83, in _worker
+    work_item.run()
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 60, in run
+    self.future.set_exception(exc)
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 567, in set_exception
+    self._invoke_callbacks()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 342, in _invoke_callbacks
+    callback(self)
+  File "/home/quynt/facp/src/facp/checkpoint.py", line 262, in done
+    fut.result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/_async_thread_executor.py", line 31, in save_wrapper
+    return save(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 475, in inner_func
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 193, in save
+    return _save_state_dict(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 456, in _save_state_dict
+    central_plan = distW.reduce_scatter("plan", local_step, global_step)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 219, in reduce_scatter
+    raise result
+torch.distributed.checkpoint.api.CheckpointException: CheckpointException ranks:dict_keys([0])
+Traceback (most recent call last): (RANK 0)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 192, in reduce_scatter
+    local_data = map_fun()
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 442, in local_step
+    local_plan = storage_writer.prepare_local_plan(local_plan)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 649, in prepare_local_plan
+    self.fs.mkdir(self.path)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 539, in mkdir
+    path.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.10/pathlib.py", line 1175, in mkdir
+    self._accessor.mkdir(self, mode)
+OSError: [Errno 28] No space left on device: '/mnt/store/ckpt-dcp-46/dcp-00000690'
+
+Exception in worker
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 83, in _worker
+    work_item.run()
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 60, in run
+    self.future.set_exception(exc)
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 567, in set_exception
+    self._invoke_callbacks()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 342, in _invoke_callbacks
+    callback(self)
+  File "/home/quynt/facp/src/facp/checkpoint.py", line 262, in done
+    fut.result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/_async_thread_executor.py", line 31, in save_wrapper
+    return save(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 475, in inner_func
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 193, in save
+    return _save_state_dict(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 456, in _save_state_dict
+    central_plan = distW.reduce_scatter("plan", local_step, global_step)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 219, in reduce_scatter
+    raise result
+torch.distributed.checkpoint.api.CheckpointException: CheckpointException ranks:dict_keys([0])
+Traceback (most recent call last): (RANK 0)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 192, in reduce_scatter
+    local_data = map_fun()
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 442, in local_step
+    local_plan = storage_writer.prepare_local_plan(local_plan)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 649, in prepare_local_plan
+    self.fs.mkdir(self.path)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 539, in mkdir
+    path.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.10/pathlib.py", line 1175, in mkdir
+    self._accessor.mkdir(self, mode)
+OSError: [Errno 28] No space left on device: '/mnt/store/ckpt-dcp-46/dcp-00000736'
+
+Exception in worker
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 83, in _worker
+    work_item.run()
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 60, in run
+    self.future.set_exception(exc)
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 567, in set_exception
+    self._invoke_callbacks()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 342, in _invoke_callbacks
+    callback(self)
+  File "/home/quynt/facp/src/facp/checkpoint.py", line 262, in done
+    fut.result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/_async_thread_executor.py", line 31, in save_wrapper
+    return save(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 475, in inner_func
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 193, in save
+    return _save_state_dict(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 456, in _save_state_dict
+    central_plan = distW.reduce_scatter("plan", local_step, global_step)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 219, in reduce_scatter
+    raise result
+torch.distributed.checkpoint.api.CheckpointException: CheckpointException ranks:dict_keys([0])
+Traceback (most recent call last): (RANK 0)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 192, in reduce_scatter
+    local_data = map_fun()
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 442, in local_step
+    local_plan = storage_writer.prepare_local_plan(local_plan)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 649, in prepare_local_plan
+    self.fs.mkdir(self.path)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 539, in mkdir
+    path.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.10/pathlib.py", line 1175, in mkdir
+    self._accessor.mkdir(self, mode)
+OSError: [Errno 28] No space left on device: '/mnt/store/ckpt-dcp-46/dcp-00000782'
+
+Exception in worker
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 83, in _worker
+    work_item.run()
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 60, in run
+    self.future.set_exception(exc)
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 567, in set_exception
+    self._invoke_callbacks()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 342, in _invoke_callbacks
+    callback(self)
+  File "/home/quynt/facp/src/facp/checkpoint.py", line 262, in done
+    fut.result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/_async_thread_executor.py", line 31, in save_wrapper
+    return save(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 475, in inner_func
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 193, in save
+    return _save_state_dict(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 456, in _save_state_dict
+    central_plan = distW.reduce_scatter("plan", local_step, global_step)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 219, in reduce_scatter
+    raise result
+torch.distributed.checkpoint.api.CheckpointException: CheckpointException ranks:dict_keys([0])
+Traceback (most recent call last): (RANK 0)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 192, in reduce_scatter
+    local_data = map_fun()
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 442, in local_step
+    local_plan = storage_writer.prepare_local_plan(local_plan)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 649, in prepare_local_plan
+    self.fs.mkdir(self.path)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 539, in mkdir
+    path.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.10/pathlib.py", line 1175, in mkdir
+    self._accessor.mkdir(self, mode)
+OSError: [Errno 28] No space left on device: '/mnt/store/ckpt-dcp-46/dcp-00000828'
+
+Exception in worker
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 83, in _worker
+    work_item.run()
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 60, in run
+    self.future.set_exception(exc)
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 567, in set_exception
+    self._invoke_callbacks()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 342, in _invoke_callbacks
+    callback(self)
+  File "/home/quynt/facp/src/facp/checkpoint.py", line 262, in done
+    fut.result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/_async_thread_executor.py", line 31, in save_wrapper
+    return save(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 475, in inner_func
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 193, in save
+    return _save_state_dict(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 456, in _save_state_dict
+    central_plan = distW.reduce_scatter("plan", local_step, global_step)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 219, in reduce_scatter
+    raise result
+torch.distributed.checkpoint.api.CheckpointException: CheckpointException ranks:dict_keys([0])
+Traceback (most recent call last): (RANK 0)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 192, in reduce_scatter
+    local_data = map_fun()
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 442, in local_step
+    local_plan = storage_writer.prepare_local_plan(local_plan)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 649, in prepare_local_plan
+    self.fs.mkdir(self.path)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 539, in mkdir
+    path.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.10/pathlib.py", line 1175, in mkdir
+    self._accessor.mkdir(self, mode)
+OSError: [Errno 28] No space left on device: '/mnt/store/ckpt-dcp-46/dcp-00000874'
+
+Exception in worker
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 83, in _worker
+    work_item.run()
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 60, in run
+    self.future.set_exception(exc)
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 567, in set_exception
+    self._invoke_callbacks()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 342, in _invoke_callbacks
+    callback(self)
+  File "/home/quynt/facp/src/facp/checkpoint.py", line 262, in done
+    fut.result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/_async_thread_executor.py", line 31, in save_wrapper
+    return save(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 475, in inner_func
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 193, in save
+    return _save_state_dict(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 456, in _save_state_dict
+    central_plan = distW.reduce_scatter("plan", local_step, global_step)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 219, in reduce_scatter
+    raise result
+torch.distributed.checkpoint.api.CheckpointException: CheckpointException ranks:dict_keys([0])
+Traceback (most recent call last): (RANK 0)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 192, in reduce_scatter
+    local_data = map_fun()
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 442, in local_step
+    local_plan = storage_writer.prepare_local_plan(local_plan)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 649, in prepare_local_plan
+    self.fs.mkdir(self.path)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 539, in mkdir
+    path.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.10/pathlib.py", line 1175, in mkdir
+    self._accessor.mkdir(self, mode)
+OSError: [Errno 28] No space left on device: '/mnt/store/ckpt-dcp-46/dcp-00000920'
+
+Exception in worker
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 83, in _worker
+    work_item.run()
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 60, in run
+    self.future.set_exception(exc)
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 567, in set_exception
+    self._invoke_callbacks()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 342, in _invoke_callbacks
+    callback(self)
+  File "/home/quynt/facp/src/facp/checkpoint.py", line 262, in done
+    fut.result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/_async_thread_executor.py", line 31, in save_wrapper
+    return save(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 475, in inner_func
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 193, in save
+    return _save_state_dict(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 456, in _save_state_dict
+    central_plan = distW.reduce_scatter("plan", local_step, global_step)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 219, in reduce_scatter
+    raise result
+torch.distributed.checkpoint.api.CheckpointException: CheckpointException ranks:dict_keys([0])
+Traceback (most recent call last): (RANK 0)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 192, in reduce_scatter
+    local_data = map_fun()
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 442, in local_step
+    local_plan = storage_writer.prepare_local_plan(local_plan)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 649, in prepare_local_plan
+    self.fs.mkdir(self.path)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 539, in mkdir
+    path.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.10/pathlib.py", line 1175, in mkdir
+    self._accessor.mkdir(self, mode)
+OSError: [Errno 28] No space left on device: '/mnt/store/ckpt-dcp-46/dcp-00000966'
+
+Exception in worker
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 83, in _worker
+    work_item.run()
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 60, in run
+    self.future.set_exception(exc)
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 567, in set_exception
+    self._invoke_callbacks()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 342, in _invoke_callbacks
+    callback(self)
+  File "/home/quynt/facp/src/facp/checkpoint.py", line 262, in done
+    fut.result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/_async_thread_executor.py", line 31, in save_wrapper
+    return save(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 475, in inner_func
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 193, in save
+    return _save_state_dict(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 456, in _save_state_dict
+    central_plan = distW.reduce_scatter("plan", local_step, global_step)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 219, in reduce_scatter
+    raise result
+torch.distributed.checkpoint.api.CheckpointException: CheckpointException ranks:dict_keys([0])
+Traceback (most recent call last): (RANK 0)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 192, in reduce_scatter
+    local_data = map_fun()
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 442, in local_step
+    local_plan = storage_writer.prepare_local_plan(local_plan)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 649, in prepare_local_plan
+    self.fs.mkdir(self.path)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 539, in mkdir
+    path.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.10/pathlib.py", line 1175, in mkdir
+    self._accessor.mkdir(self, mode)
+OSError: [Errno 28] No space left on device: '/mnt/store/ckpt-dcp-46/dcp-00001012'
+
+Exception in worker
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 83, in _worker
+    work_item.run()
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 60, in run
+    self.future.set_exception(exc)
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 567, in set_exception
+    self._invoke_callbacks()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 342, in _invoke_callbacks
+    callback(self)
+  File "/home/quynt/facp/src/facp/checkpoint.py", line 262, in done
+    fut.result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/_async_thread_executor.py", line 31, in save_wrapper
+    return save(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 475, in inner_func
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 193, in save
+    return _save_state_dict(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 456, in _save_state_dict
+    central_plan = distW.reduce_scatter("plan", local_step, global_step)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 219, in reduce_scatter
+    raise result
+torch.distributed.checkpoint.api.CheckpointException: CheckpointException ranks:dict_keys([0])
+Traceback (most recent call last): (RANK 0)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 192, in reduce_scatter
+    local_data = map_fun()
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 442, in local_step
+    local_plan = storage_writer.prepare_local_plan(local_plan)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 649, in prepare_local_plan
+    self.fs.mkdir(self.path)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 539, in mkdir
+    path.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.10/pathlib.py", line 1175, in mkdir
+    self._accessor.mkdir(self, mode)
+OSError: [Errno 28] No space left on device: '/mnt/store/ckpt-dcp-46/dcp-00001058'
+
+Exception in worker
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 83, in _worker
+    work_item.run()
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 60, in run
+    self.future.set_exception(exc)
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 567, in set_exception
+    self._invoke_callbacks()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 342, in _invoke_callbacks
+    callback(self)
+  File "/home/quynt/facp/src/facp/checkpoint.py", line 262, in done
+    fut.result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/_async_thread_executor.py", line 31, in save_wrapper
+    return save(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 475, in inner_func
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 193, in save
+    return _save_state_dict(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 456, in _save_state_dict
+    central_plan = distW.reduce_scatter("plan", local_step, global_step)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 219, in reduce_scatter
+    raise result
+torch.distributed.checkpoint.api.CheckpointException: CheckpointException ranks:dict_keys([0])
+Traceback (most recent call last): (RANK 0)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 192, in reduce_scatter
+    local_data = map_fun()
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 442, in local_step
+    local_plan = storage_writer.prepare_local_plan(local_plan)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 649, in prepare_local_plan
+    self.fs.mkdir(self.path)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 539, in mkdir
+    path.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.10/pathlib.py", line 1175, in mkdir
+    self._accessor.mkdir(self, mode)
+OSError: [Errno 28] No space left on device: '/mnt/store/ckpt-dcp-46/dcp-00001104'
+
+Exception in worker
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 83, in _worker
+    work_item.run()
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 60, in run
+    self.future.set_exception(exc)
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 567, in set_exception
+    self._invoke_callbacks()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 342, in _invoke_callbacks
+    callback(self)
+  File "/home/quynt/facp/src/facp/checkpoint.py", line 262, in done
+    fut.result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/_async_thread_executor.py", line 31, in save_wrapper
+    return save(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 475, in inner_func
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 193, in save
+    return _save_state_dict(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 456, in _save_state_dict
+    central_plan = distW.reduce_scatter("plan", local_step, global_step)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 219, in reduce_scatter
+    raise result
+torch.distributed.checkpoint.api.CheckpointException: CheckpointException ranks:dict_keys([0])
+Traceback (most recent call last): (RANK 0)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 192, in reduce_scatter
+    local_data = map_fun()
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 442, in local_step
+    local_plan = storage_writer.prepare_local_plan(local_plan)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 649, in prepare_local_plan
+    self.fs.mkdir(self.path)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 539, in mkdir
+    path.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.10/pathlib.py", line 1175, in mkdir
+    self._accessor.mkdir(self, mode)
+OSError: [Errno 28] No space left on device: '/mnt/store/ckpt-dcp-46/dcp-00001150'
+
+Exception in worker
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 83, in _worker
+    work_item.run()
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 60, in run
+    self.future.set_exception(exc)
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 567, in set_exception
+    self._invoke_callbacks()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 342, in _invoke_callbacks
+    callback(self)
+  File "/home/quynt/facp/src/facp/checkpoint.py", line 262, in done
+    fut.result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/_async_thread_executor.py", line 31, in save_wrapper
+    return save(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 475, in inner_func
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 193, in save
+    return _save_state_dict(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 456, in _save_state_dict
+    central_plan = distW.reduce_scatter("plan", local_step, global_step)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 219, in reduce_scatter
+    raise result
+torch.distributed.checkpoint.api.CheckpointException: CheckpointException ranks:dict_keys([0])
+Traceback (most recent call last): (RANK 0)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 192, in reduce_scatter
+    local_data = map_fun()
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 442, in local_step
+    local_plan = storage_writer.prepare_local_plan(local_plan)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 649, in prepare_local_plan
+    self.fs.mkdir(self.path)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 539, in mkdir
+    path.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.10/pathlib.py", line 1175, in mkdir
+    self._accessor.mkdir(self, mode)
+OSError: [Errno 28] No space left on device: '/mnt/store/ckpt-dcp-46/dcp-00001196'
+
+Exception in worker
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 83, in _worker
+    work_item.run()
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 60, in run
+    self.future.set_exception(exc)
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 567, in set_exception
+    self._invoke_callbacks()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 342, in _invoke_callbacks
+    callback(self)
+  File "/home/quynt/facp/src/facp/checkpoint.py", line 262, in done
+    fut.result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/_async_thread_executor.py", line 31, in save_wrapper
+    return save(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 475, in inner_func
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 193, in save
+    return _save_state_dict(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 456, in _save_state_dict
+    central_plan = distW.reduce_scatter("plan", local_step, global_step)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 219, in reduce_scatter
+    raise result
+torch.distributed.checkpoint.api.CheckpointException: CheckpointException ranks:dict_keys([0])
+Traceback (most recent call last): (RANK 0)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 192, in reduce_scatter
+    local_data = map_fun()
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 442, in local_step
+    local_plan = storage_writer.prepare_local_plan(local_plan)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 649, in prepare_local_plan
+    self.fs.mkdir(self.path)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 539, in mkdir
+    path.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.10/pathlib.py", line 1175, in mkdir
+    self._accessor.mkdir(self, mode)
+OSError: [Errno 28] No space left on device: '/mnt/store/ckpt-dcp-46/dcp-00001242'
+
+Exception in worker
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 83, in _worker
+    work_item.run()
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 60, in run
+    self.future.set_exception(exc)
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 567, in set_exception
+    self._invoke_callbacks()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 342, in _invoke_callbacks
+    callback(self)
+  File "/home/quynt/facp/src/facp/checkpoint.py", line 262, in done
+    fut.result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/_async_thread_executor.py", line 31, in save_wrapper
+    return save(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 475, in inner_func
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 193, in save
+    return _save_state_dict(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 456, in _save_state_dict
+    central_plan = distW.reduce_scatter("plan", local_step, global_step)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 219, in reduce_scatter
+    raise result
+torch.distributed.checkpoint.api.CheckpointException: CheckpointException ranks:dict_keys([0])
+Traceback (most recent call last): (RANK 0)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 192, in reduce_scatter
+    local_data = map_fun()
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 442, in local_step
+    local_plan = storage_writer.prepare_local_plan(local_plan)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 649, in prepare_local_plan
+    self.fs.mkdir(self.path)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 539, in mkdir
+    path.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.10/pathlib.py", line 1175, in mkdir
+    self._accessor.mkdir(self, mode)
+OSError: [Errno 28] No space left on device: '/mnt/store/ckpt-dcp-46/dcp-00001288'
+
+Exception in worker
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 83, in _worker
+    work_item.run()
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 60, in run
+    self.future.set_exception(exc)
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 567, in set_exception
+    self._invoke_callbacks()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 342, in _invoke_callbacks
+    callback(self)
+  File "/home/quynt/facp/src/facp/checkpoint.py", line 262, in done
+    fut.result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/_async_thread_executor.py", line 31, in save_wrapper
+    return save(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 475, in inner_func
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 193, in save
+    return _save_state_dict(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 456, in _save_state_dict
+    central_plan = distW.reduce_scatter("plan", local_step, global_step)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 219, in reduce_scatter
+    raise result
+torch.distributed.checkpoint.api.CheckpointException: CheckpointException ranks:dict_keys([0])
+Traceback (most recent call last): (RANK 0)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 192, in reduce_scatter
+    local_data = map_fun()
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 442, in local_step
+    local_plan = storage_writer.prepare_local_plan(local_plan)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 649, in prepare_local_plan
+    self.fs.mkdir(self.path)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 539, in mkdir
+    path.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.10/pathlib.py", line 1175, in mkdir
+    self._accessor.mkdir(self, mode)
+OSError: [Errno 28] No space left on device: '/mnt/store/ckpt-dcp-46/dcp-00001334'
+
+Exception in worker
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 83, in _worker
+    work_item.run()
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 60, in run
+    self.future.set_exception(exc)
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 567, in set_exception
+    self._invoke_callbacks()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 342, in _invoke_callbacks
+    callback(self)
+  File "/home/quynt/facp/src/facp/checkpoint.py", line 262, in done
+    fut.result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/_async_thread_executor.py", line 31, in save_wrapper
+    return save(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 475, in inner_func
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 193, in save
+    return _save_state_dict(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 456, in _save_state_dict
+    central_plan = distW.reduce_scatter("plan", local_step, global_step)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 219, in reduce_scatter
+    raise result
+torch.distributed.checkpoint.api.CheckpointException: CheckpointException ranks:dict_keys([0])
+Traceback (most recent call last): (RANK 0)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 192, in reduce_scatter
+    local_data = map_fun()
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 442, in local_step
+    local_plan = storage_writer.prepare_local_plan(local_plan)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 649, in prepare_local_plan
+    self.fs.mkdir(self.path)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 539, in mkdir
+    path.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.10/pathlib.py", line 1175, in mkdir
+    self._accessor.mkdir(self, mode)
+OSError: [Errno 28] No space left on device: '/mnt/store/ckpt-dcp-46/dcp-00001380'
+
+Exception in worker
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 83, in _worker
+    work_item.run()
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 60, in run
+    self.future.set_exception(exc)
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 567, in set_exception
+    self._invoke_callbacks()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 342, in _invoke_callbacks
+    callback(self)
+  File "/home/quynt/facp/src/facp/checkpoint.py", line 262, in done
+    fut.result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/_async_thread_executor.py", line 31, in save_wrapper
+    return save(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 475, in inner_func
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 193, in save
+    return _save_state_dict(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 456, in _save_state_dict
+    central_plan = distW.reduce_scatter("plan", local_step, global_step)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 219, in reduce_scatter
+    raise result
+torch.distributed.checkpoint.api.CheckpointException: CheckpointException ranks:dict_keys([0])
+Traceback (most recent call last): (RANK 0)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 192, in reduce_scatter
+    local_data = map_fun()
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 442, in local_step
+    local_plan = storage_writer.prepare_local_plan(local_plan)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 649, in prepare_local_plan
+    self.fs.mkdir(self.path)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 539, in mkdir
+    path.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.10/pathlib.py", line 1175, in mkdir
+    self._accessor.mkdir(self, mode)
+OSError: [Errno 28] No space left on device: '/mnt/store/ckpt-dcp-46/dcp-00001426'
+
+Exception in worker
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 83, in _worker
+    work_item.run()
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 60, in run
+    self.future.set_exception(exc)
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 567, in set_exception
+    self._invoke_callbacks()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 342, in _invoke_callbacks
+    callback(self)
+  File "/home/quynt/facp/src/facp/checkpoint.py", line 262, in done
+    fut.result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/_async_thread_executor.py", line 31, in save_wrapper
+    return save(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 475, in inner_func
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 193, in save
+    return _save_state_dict(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 456, in _save_state_dict
+    central_plan = distW.reduce_scatter("plan", local_step, global_step)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 219, in reduce_scatter
+    raise result
+torch.distributed.checkpoint.api.CheckpointException: CheckpointException ranks:dict_keys([0])
+Traceback (most recent call last): (RANK 0)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 192, in reduce_scatter
+    local_data = map_fun()
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 442, in local_step
+    local_plan = storage_writer.prepare_local_plan(local_plan)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 649, in prepare_local_plan
+    self.fs.mkdir(self.path)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 539, in mkdir
+    path.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.10/pathlib.py", line 1175, in mkdir
+    self._accessor.mkdir(self, mode)
+OSError: [Errno 28] No space left on device: '/mnt/store/ckpt-dcp-46/dcp-00001472'
+
+Exception in worker
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 83, in _worker
+    work_item.run()
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 60, in run
+    self.future.set_exception(exc)
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 567, in set_exception
+    self._invoke_callbacks()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 342, in _invoke_callbacks
+    callback(self)
+  File "/home/quynt/facp/src/facp/checkpoint.py", line 262, in done
+    fut.result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/_async_thread_executor.py", line 31, in save_wrapper
+    return save(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 475, in inner_func
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 193, in save
+    return _save_state_dict(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 456, in _save_state_dict
+    central_plan = distW.reduce_scatter("plan", local_step, global_step)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 219, in reduce_scatter
+    raise result
+torch.distributed.checkpoint.api.CheckpointException: CheckpointException ranks:dict_keys([0])
+Traceback (most recent call last): (RANK 0)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/utils.py", line 192, in reduce_scatter
+    local_data = map_fun()
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/logger.py", line 87, in wrapper
+    result = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/state_dict_saver.py", line 442, in local_step
+    local_plan = storage_writer.prepare_local_plan(local_plan)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 649, in prepare_local_plan
+    self.fs.mkdir(self.path)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/checkpoint/filesystem.py", line 539, in mkdir
+    path.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.10/pathlib.py", line 1175, in mkdir
+    self._accessor.mkdir(self, mode)
+OSError: [Errno 28] No space left on device: '/mnt/store/ckpt-dcp-46/dcp-00001518'
+

@@ -1,0 +1,3 @@
+{"t": 1794734129.8667967, "src": "supervisor", "event": "run_start", "duration": 300.0, "kills": [], "cmd": ["python3", "examples/train_gpt2.py", "--model", "gpt2-large", "--policy", "none", "--grad-ckpt", "--batch", "4", "--seq", "512", "--seed", "0", "--data-dir", "/home/quynt/data", "--ckpt-dir", "/mnt/store/ckpt-warmup", "--record", "/home/quynt/results/seed1/warmup/train.jsonl"]}
+{"t": 1794734129.8674142, "src": "supervisor", "event": "child_start", "incarnation": 0, "pid": 7971}
+{"t": 1794734431.0846717, "src": "supervisor", "event": "run_end", "reason": "duration", "elapsed": 301.2178704738617}
