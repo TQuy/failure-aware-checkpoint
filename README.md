@@ -38,7 +38,8 @@ Every policy sees the same seeded failure times. Lost time is computed from the 
 | Two-phase checkpoint library and the DCP baseline (`src/facp/checkpoint.py`) | Done; tested with kills on a tiny model and on GPT-2 small on a GPU, every redone step reproduces its logged loss |
 | Failure injector and supervisor (`src/facp/supervisor.py`) | Done |
 | Lost-time accounting (`src/facp/accounting.py`) | Done; the four parts explain the measured loss to within a few seconds |
-| Baseline runs (GPT-2 large, one T4) | Planned for 20 November |
+| Baseline runs (GPT-2 large, one T4) | Done 15–16 November, three seeds at one failure per hour; table in [`results/baseline_table.md`](results/baseline_table.md), notes in [`results/README.md`](results/README.md) |
+| Failure-aware rule against the baselines, at one failure per 15 and per 60 minutes | Due 27 November |
 
 ## Running it
 
@@ -54,6 +55,22 @@ One run: GPT-2 small, a checkpoint policy, kills at 60 and 150 seconds, then the
     python -m facp.accounting run/
 
 Policies: `none`, `fixed:N` (every N steps), `dcp:N` (PyTorch Distributed Checkpoint `async_save` every N steps), `checkfreq:BUDGET` (for example `checkfreq:0.01`), `failure-aware:MTBF_SECONDS`. With `--mtbf` and `--seed` instead of `--kill-at`, the supervisor draws the kill times, and the same seed gives the same times for every policy.
+
+## Reproducing the baseline
+
+The baseline table comes from one command per seed on a GPU machine. It runs a thrown-away warm-up, a reference without checkpoints, then CheckFreq at 1% and 5% and DCP every 46 steps, 2 hours each, all killed at the same seeded moments.
+
+    SEED=1 CELLS="ref checkfreq:0.01 checkfreq:0.05 dcp:46" SHUTDOWN=0 \
+        bash ~/facp/experiments/run-matrix.sh
+
+It expects the repository at `~/facp` and the checkpoint storage at `/mnt/store`. On Google Cloud, `experiments/cloud.sh` creates a matching pair of machines (an n1-standard-8 with one T4, and a small NFS storage machine) and copies the repository over; `experiments/setup-store.sh` and `experiments/setup-gpu.sh` prepare them:
+
+    PROJECT=my-project experiments/cloud.sh create 1
+    PROJECT=my-project experiments/cloud.sh ssh 1 store "bash -s" < experiments/setup-store.sh
+    PROJECT=my-project experiments/cloud.sh push 1
+    PROJECT=my-project experiments/cloud.sh ssh 1 gpu bash ~/facp/experiments/setup-gpu.sh $(PROJECT=my-project experiments/cloud.sh store-ip 1)
+
+A matrix takes about 6.5 hours and about 5.5 USD on demand. Afterwards, `cloud.sh pull 1 results/pair1` copies the results back, and `python experiments/baseline_table.py results` rebuilds the table.
 
 ## Licence
 
