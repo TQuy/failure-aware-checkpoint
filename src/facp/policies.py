@@ -22,9 +22,17 @@ class Measured:
     stall: float | None = None
     write: float | None = None
     restore: float = 0.0
+    # The first save of a process stalls about 4.9 s against 0.75 s later on
+    # GPT-2 large. Kept in the running average, it held CheckFreq 1% at
+    # 80-110 steps for the first 25 minutes of each run, so it is dropped.
+    skip_first: tuple = ("stall",)
     _seen: set = field(default_factory=set)
+    _skipped: set = field(default_factory=set)
 
     def update(self, name: str, value: float) -> None:
+        if name in self.skip_first and name not in self._skipped:
+            self._skipped.add(name)
+            return
         old = getattr(self, name)
         new = value if old is None or name not in self._seen else (1 - self.alpha) * old + self.alpha * value
         setattr(self, name, new)
