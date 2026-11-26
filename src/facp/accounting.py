@@ -10,7 +10,13 @@ and split into four parts that should add up to it:
 - slowdown: extra step time while a background write ran, on kept steps;
 - redone: for each kill, the time from the end of the restored step to the
   kill (the age of the newest finished checkpoint at the failure);
-- restart: from each kill to the start of the first step after restore.
+- restart: from each kill to the start of the first step after restore
+  (or to the next kill, if that comes first).
+
+A kill before the run's very first step (while the model is still loading)
+cannot depend on the policy, because no checkpoint exists yet. Those lives
+are left out of the run and counted in `early_kills`; the run starts at its
+first real step, as it does without such a kill.
 
 The residual (lost minus the four parts) is reported, not hidden; a large
 residual means the accounting is missing something.
@@ -55,11 +61,21 @@ def account(train_record: str | Path, supervisor_record: str | Path,
         clean = [e["seconds"] for e in times if not e["writing"]]
         clean_step = statistics.fmean(clean)
 
-    first = incarnations[0]
-    first_step = next(e for e in first if e["event"] == "step_time")
+    # lives killed before the run's first step: no policy has acted yet
+    early = 0
+    while incarnations and not any(e["event"] == "step_time" for e in incarnations[0]):
+        incarnations.pop(0)
+        early += 1
+    kills = kills[early:]
+
+    first_step = next(e for e in incarnations[0] if e["event"] == "step_time")
     origin = first_step["t"] - first_step["seconds"]
     wall = end["t"] - origin
     startup = origin - start["t"]
+
+    def later(i: int, event: str) -> dict | None:
+        """The first `event` in a life after life i (a life may be killed before it logs one)."""
+        return next((e for inc in incarnations[i + 1:] for e in inc if e["event"] == event), None)
 
     final_step = max(e["step"] for e in incarnations[-1] if e["event"] == "step_time")
     useful = final_step * clean_step
@@ -67,10 +83,8 @@ def account(train_record: str | Path, supervisor_record: str | Path,
 
     stall = slowdown = redone = restart = 0.0
     for i, inc in enumerate(incarnations):
-        if i + 1 < len(incarnations):
-            kept_upto = next(e for e in incarnations[i + 1] if e["event"] == "restore")["step"]
-        else:
-            kept_upto = final_step
+        restore = later(i, "restore")
+        kept_upto = restore["step"] if restore is not None else final_step
         steps = {e["step"]: e for e in inc if e["event"] == "step_time"}
         killed = i < len(kills)
         for e in inc:
@@ -89,10 +103,12 @@ def account(train_record: str | Path, supervisor_record: str | Path,
                 # nothing new was kept in this life: every step here is redone
                 first_here = min(steps.values(), key=lambda e: e["step"])
                 redone += kill_t - (first_here["t"] - first_here["seconds"])
-            nxt = next((e for e in incarnations[i + 1] if e["event"] == "step_time"), None) \
-                if i + 1 < len(incarnations) else None
+            nxt = later(i, "step_time")
             if nxt is not None:
-                restart += (nxt["t"] - nxt["seconds"]) - kill_t
+                resumed = nxt["t"] - nxt["seconds"]
+                if i + 1 < len(kills):  # killed again before a step: count up to that kill
+                    resumed = min(resumed, start["t"] + kills[i + 1]["at"])
+                restart += max(0.0, resumed - kill_t)
 
     hours = wall / 3600.0
     parts = {"stall": stall, "slowdown": slowdown, "redone": redone, "restart": restart}
@@ -100,6 +116,7 @@ def account(train_record: str | Path, supervisor_record: str | Path,
         "wall_s": wall,
         "startup_s": startup,
         "kills": len(kills),
+        "early_kills": early,
         "final_step": final_step,
         "clean_step_s": clean_step,
         "lost_s": lost,

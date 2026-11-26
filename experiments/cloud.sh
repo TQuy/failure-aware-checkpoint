@@ -9,6 +9,10 @@
 #   PROJECT=my-project experiments/cloud.sh create 1
 #   PROJECT=my-project experiments/cloud.sh backstop 1 420   # power off in 420 min
 #   PROJECT=my-project experiments/cloud.sh stop 1
+#
+# SPOT=1 makes `create` a spot GPU machine that Google may stop at any time
+# (stopped, not deleted, so its disk and results survive). The storage
+# machine is always on demand. GCLOUD names the gcloud binary to use.
 set -euo pipefail
 
 : "${PROJECT:?set PROJECT to the Google Cloud project}"
@@ -16,11 +20,29 @@ ZONE=${ZONE:-us-central1-f}
 PREFIX=${PREFIX:-facp}
 [[ $PREFIX == facp* ]] || { echo "PREFIX must start with facp" >&2; exit 1; }
 GPU_IMAGE_FAMILY=${GPU_IMAGE_FAMILY:-pytorch-2-9-cu129-ubuntu-2204-nvidia-580}
-G=(gcloud --project "$PROJECT")
+G=("${GCLOUD:-gcloud}" --project "$PROJECT")
+SPOT=${SPOT:-0}
+spot_flags=()
+[[ $SPOT == 1 ]] && spot_flags=(--provisioning-model=SPOT --instance-termination-action=STOP)
 
 gpu() { echo "${PREFIX}-gpu-$1"; }
 store() { echo "${PREFIX}-store-$1"; }
-remote() { "${G[@]}" compute ssh "$1" --zone "$ZONE" --quiet --command "$2"; }
+# SSH_USER logs in as that user, so a second controller (the watcher) reaches
+# the same home folder as the one that launched the runs
+# SSH_DIRECT=1 uses plain ssh to the external address with SSH_KEY, for a
+# controller whose account may only touch these machines (no project read)
+remote() {
+  if [[ ${SSH_DIRECT:-0} == 1 ]]; then
+    local ip
+    ip=$("${G[@]}" compute instances describe "$1" --zone "$ZONE" \
+      --format='value(networkInterfaces[0].accessConfigs[0].natIP)')
+    ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR \
+      -o ConnectTimeout=20 -o BatchMode=yes -i "${SSH_KEY:-$HOME/.ssh/google_compute_engine}" \
+      "${SSH_USER:?}@$ip" "$2"
+  else
+    "${G[@]}" compute ssh "${SSH_USER:+$SSH_USER@}$1" --zone "$ZONE" --quiet --command "$2"
+  fi
+}
 
 require_running() {
   local state
@@ -37,7 +59,7 @@ case $cmd in
       --boot-disk-size 100GB --boot-disk-type pd-balanced
     "${G[@]}" compute instances create "$(gpu "$n")" --zone "$ZONE" \
       --machine-type n1-standard-8 --accelerator type=nvidia-tesla-t4,count=1 \
-      --maintenance-policy TERMINATE --image-family "$GPU_IMAGE_FAMILY" \
+      --maintenance-policy TERMINATE "${spot_flags[@]}" --image-family "$GPU_IMAGE_FAMILY" \
       --image-project deeplearning-platform-release \
       --boot-disk-size 150GB --boot-disk-type pd-balanced \
       --metadata install-nvidia-driver=True
@@ -75,6 +97,29 @@ case $cmd in
     mkdir -p "$out"
     "${G[@]}" compute ssh "$(gpu "$n")" --zone "$ZONE" --quiet --command "tar czf - -C ~ results" |
       tar xzf - -C "$out" ;;
+  add-key)
+    # append a key line (user:type key comment) to both machines' own ssh-keys,
+    # keeping the keys already there
+    line=$(cat "${3:?key line file}")
+    for name in "$(gpu "$n")" "$(store "$n")"; do
+      tmp=$(mktemp)
+      "${G[@]}" compute instances describe "$name" --zone "$ZONE" --format=json |
+        python3 -c 'import json,sys
+items=json.load(sys.stdin).get("metadata",{}).get("items",[])
+print(next((i["value"] for i in items if i["key"]=="ssh-keys"),""))' | grep -v '^$' > "$tmp" || true
+      grep -qF "$line" "$tmp" || echo "$line" >> "$tmp"
+      "${G[@]}" compute instances add-metadata "$name" --zone "$ZONE" --metadata-from-file ssh-keys="$tmp"
+      rm -f "$tmp"
+    done ;;
+  state)
+    # one machine's state; needs no project-wide list permission
+    [[ ${3:-gpu} == gpu ]] && name=$(gpu "$n") || name=$(store "$n")
+    "${G[@]}" compute instances describe "$name" --zone "$ZONE" --format='value(status)' ;;
+  pull-store)
+    # copy one results folder from the storage machine (readable while the GPU is off)
+    dir=${3:?results folder name}; out=${4:-results}
+    mkdir -p "$out"
+    remote "$(store "$n")" "tar czf - -C /srv/facp $dir" | tar xzf - -C "$out" ;;
   status)
     "${G[@]}" compute instances list --filter="name~^${PREFIX}-" \
       --format='table(name,zone.basename(),machineType.basename(),status)' ;;
