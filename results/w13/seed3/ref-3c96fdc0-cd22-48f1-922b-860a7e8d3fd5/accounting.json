@@ -1,0 +1,16 @@
+{
+  "wall_s": 884.1585505008698,
+  "startup_s": 19.419612646102905,
+  "kills": 0,
+  "early_kills": 0,
+  "final_step": 214,
+  "clean_step_s": 4.1303716886823425,
+  "lost_s": 0.25900912284851074,
+  "lost_s_per_hour": 1.0545991346534191,
+  "stall_s": 0.0,
+  "slowdown_s": 0.0,
+  "redone_s": 0.0,
+  "restart_s": 0.0,
+  "residual_s": 0.25900912284851074,
+  "saves": 0
+}

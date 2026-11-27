@@ -1,0 +1,15 @@
+{"t": 1795737250.464103, "src": "supervisor", "event": "run_start", "duration": 7200.0, "kills": [969.3015713251997, 1361.285892044693, 3176.6849419413966, 3782.8739535031605, 4030.6637073721918, 5879.19471889458], "cmd": ["python3", "examples/train_gpt2.py", "--model", "gpt2-large", "--policy", "failure-aware:3600", "--grad-ckpt", "--batch", "4", "--seq", "512", "--seed", "0", "--data-dir", "/home/quynt/data", "--ckpt-dir", "/mnt/store/ckpt--home-quynt-results-w13-seed4-m3600-failure-aware-3600", "--record", "/home/quynt/results/w13-seed4/m3600/failure-aware-3600/train.jsonl"]}
+{"t": 1795737250.4647894, "src": "supervisor", "event": "child_start", "incarnation": 0, "pid": 43695}
+{"t": 1795738222.5308797, "src": "supervisor", "event": "kill", "incarnation": 0, "at": 969.3017430305481}
+{"t": 1795738222.532643, "src": "supervisor", "event": "child_start", "incarnation": 1, "pid": 44493}
+{"t": 1795738617.0458138, "src": "supervisor", "event": "kill", "incarnation": 1, "at": 1361.2862849235535}
+{"t": 1795738617.0475366, "src": "supervisor", "event": "child_start", "incarnation": 2, "pid": 44789}
+{"t": 1795740438.0582387, "src": "supervisor", "event": "kill", "incarnation": 2, "at": 3176.685353755951}
+{"t": 1795740438.0635793, "src": "supervisor", "event": "child_start", "incarnation": 3, "pid": 46183}
+{"t": 1795741042.4546597, "src": "supervisor", "event": "kill", "incarnation": 3, "at": 3782.8742969036102}
+{"t": 1795741042.45655, "src": "supervisor", "event": "child_start", "incarnation": 4, "pid": 46637}
+{"t": 1795741285.082772, "src": "supervisor", "event": "kill", "incarnation": 4, "at": 4030.664299249649}
+{"t": 1795741285.0845747, "src": "supervisor", "event": "child_start", "incarnation": 5, "pid": 46833}
+{"t": 1795743139.8448107, "src": "supervisor", "event": "kill", "incarnation": 5, "at": 5879.195013999939}
+{"t": 1795743139.8468025, "src": "supervisor", "event": "child_start", "incarnation": 6, "pid": 48207}
+{"t": 1795744462.6159003, "src": "supervisor", "event": "run_end", "reason": "duration", "elapsed": 7212.151792526245}

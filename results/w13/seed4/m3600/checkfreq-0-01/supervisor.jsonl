@@ -1,0 +1,15 @@
+{"t": 1795715618.7776628, "src": "supervisor", "event": "run_start", "duration": 7200.0, "kills": [969.3015713251997, 1361.285892044693, 3176.6849419413966, 3782.8739535031605, 4030.6637073721918, 5879.19471889458], "cmd": ["python3", "examples/train_gpt2.py", "--model", "gpt2-large", "--policy", "checkfreq:0.01", "--grad-ckpt", "--batch", "4", "--seq", "512", "--seed", "0", "--data-dir", "/home/quynt/data", "--ckpt-dir", "/mnt/store/ckpt--home-quynt-results-w13-seed4-m3600-checkfreq-0-01", "--record", "/home/quynt/results/w13-seed4/m3600/checkfreq-0-01/train.jsonl"]}
+{"t": 1795715618.7784617, "src": "supervisor", "event": "child_start", "incarnation": 0, "pid": 27432}
+{"t": 1795716591.3766272, "src": "supervisor", "event": "kill", "incarnation": 0, "at": 969.3018243312836}
+{"t": 1795716591.3785882, "src": "supervisor", "event": "child_start", "incarnation": 1, "pid": 28152}
+{"t": 1795716983.7020268, "src": "supervisor", "event": "kill", "incarnation": 1, "at": 1361.286224603653}
+{"t": 1795716983.7037652, "src": "supervisor", "event": "child_start", "incarnation": 2, "pid": 28453}
+{"t": 1795718805.9511604, "src": "supervisor", "event": "kill", "incarnation": 2, "at": 3176.6854331493378}
+{"t": 1795718805.955703, "src": "supervisor", "event": "child_start", "incarnation": 3, "pid": 29797}
+{"t": 1795719411.7833266, "src": "supervisor", "event": "kill", "incarnation": 3, "at": 3782.8744747638702}
+{"t": 1795719411.7851782, "src": "supervisor", "event": "child_start", "incarnation": 4, "pid": 30254}
+{"t": 1795719653.1905055, "src": "supervisor", "event": "kill", "incarnation": 4, "at": 4030.6642122268677}
+{"t": 1795719653.1923976, "src": "supervisor", "event": "child_start", "incarnation": 5, "pid": 30442}
+{"t": 1795721508.8543367, "src": "supervisor", "event": "kill", "incarnation": 5, "at": 5879.195244073868}
+{"t": 1795721508.8561637, "src": "supervisor", "event": "child_start", "incarnation": 6, "pid": 31811}
+{"t": 1795722823.1608033, "src": "supervisor", "event": "run_end", "reason": "duration", "elapsed": 7204.383136510849}

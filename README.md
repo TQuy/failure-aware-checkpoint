@@ -39,7 +39,7 @@ Every policy sees the same seeded failure times. Lost time is computed from the 
 | Failure injector and supervisor (`src/facp/supervisor.py`) | Done |
 | Lost-time accounting (`src/facp/accounting.py`) | Done; the four parts explain the measured loss to within a few seconds |
 | Baseline runs (GPT-2 large, one T4) | Done 15–16 November, three seeds at one failure per hour; table in [`results/baseline_table.md`](results/baseline_table.md), notes in [`results/README.md`](results/README.md) |
-| Failure-aware rule against the baselines, at one failure per 15 and per 60 minutes | Due 27 November |
+| Failure-aware rule against the baselines, at one failure per 15 and per 60 minutes | Done 26–27 November, five seeds, all four policies at both rates in one boot per seed; the cost model checked against each run. Tables in [`results/w13/w13_table.md`](results/w13/w13_table.md) |
 
 ## Running it
 
@@ -71,6 +71,14 @@ It expects the repository at `~/facp` and the checkpoint storage at `/mnt/store`
     PROJECT=my-project experiments/cloud.sh ssh 1 gpu bash ~/facp/experiments/setup-gpu.sh $(PROJECT=my-project experiments/cloud.sh store-ip 1)
 
 A matrix takes about 6.5 hours and about 5.5 USD on demand. Afterwards, `cloud.sh pull 1 results/pair1` copies the results back, and `python experiments/baseline_table.py results` rebuilds the table.
+
+## Reproducing the Week 13 validation
+
+Each seed runs on its own GPU machine, in one boot: a warm-up, a reference, then the four policies at one failure per 15 minutes, then the four at one per 60 minutes, 2 hours each (about 16 hours 20 minutes in all).
+
+    experiments/launch-w13.sh 1      # creates or starts pair 1 and starts seed 1
+
+`experiments/watch-w13.sh` watches the pairs from another machine: it restarts a spot machine the cloud stopped, resumes its seed (a failure-rate group that did not finish in one boot is rerun in full), copies the results and stops each pair when its seed is done. With the results in `results/w13/seedN/`, `python experiments/w13_table.py results` rebuilds the tables, including the cost model against measurement.
 
 ## Licence
 

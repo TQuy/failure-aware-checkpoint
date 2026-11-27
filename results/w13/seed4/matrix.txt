@@ -1,0 +1,7 @@
+matrix seed=4 duration=7200 cells=ref checkfreq:0.01@900 checkfreq:0.05@900 dcp:64@900 failure-aware:900@900 checkfreq:0.01@3600 checkfreq:0.05@3600 dcp:64@3600 failure-aware:3600@3600 model=gpt2-large batch=4 seq=512
+boot=be8d3d2a-8e08-4dfe-acda-6c31b18735b1 at 2026-11-26T09:32:40+00:00
+name, clocks.current.sm [MHz], clocks.max.sm [MHz]
+Tesla T4, 300 MHz, 1590 MHz
+group mtbf=900: run
+group mtbf=3600: run
+done: 2026-11-27T01:54:25+00:00

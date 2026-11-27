@@ -1,0 +1,23 @@
+{"t": 1795678149.5949998, "src": "supervisor", "event": "run_start", "duration": 7200.0, "kills": [129.86195769855829, 1822.002596577121, 3120.6746293891174, 3385.691974593954, 4001.344876287594, 4538.565758968792, 5487.511236628085, 6886.639421635048, 6975.344324750988, 7001.225646862952], "cmd": ["python3", "examples/train_gpt2.py", "--model", "gpt2-large", "--policy", "checkfreq:0.01", "--grad-ckpt", "--batch", "4", "--seq", "512", "--seed", "0", "--data-dir", "/home/quynt/data", "--ckpt-dir", "/mnt/store/ckpt--home-quynt-results-w13-seed1-m900-checkfreq-0-01", "--record", "/home/quynt/results/w13-seed1/m900/checkfreq-0-01/train.jsonl"]}
+{"t": 1795678149.5955482, "src": "supervisor", "event": "child_start", "incarnation": 0, "pid": 4855}
+{"t": 1795678286.0503376, "src": "supervisor", "event": "kill", "incarnation": 0, "at": 129.86233735084534}
+{"t": 1795678286.0511253, "src": "supervisor", "event": "child_start", "incarnation": 1, "pid": 4987}
+{"t": 1795679986.897015, "src": "supervisor", "event": "kill", "incarnation": 1, "at": 1822.0031778812408}
+{"t": 1795679986.903468, "src": "supervisor", "event": "child_start", "incarnation": 2, "pid": 6280}
+{"t": 1795681280.6892705, "src": "supervisor", "event": "kill", "incarnation": 2, "at": 3120.675049304962}
+{"t": 1795681280.6907008, "src": "supervisor", "event": "child_start", "incarnation": 3, "pid": 7264}
+{"t": 1795681545.9199824, "src": "supervisor", "event": "kill", "incarnation": 3, "at": 3385.692397594452}
+{"t": 1795681545.9216526, "src": "supervisor", "event": "child_start", "incarnation": 4, "pid": 7481}
+{"t": 1795682160.925292, "src": "supervisor", "event": "kill", "incarnation": 4, "at": 4001.34522151947}
+{"t": 1795682160.9268491, "src": "supervisor", "event": "child_start", "incarnation": 5, "pid": 7952}
+{"t": 1795682695.90429, "src": "supervisor", "event": "kill", "incarnation": 5, "at": 4538.56592798233}
+{"t": 1795682695.9059756, "src": "supervisor", "event": "child_start", "incarnation": 6, "pid": 8357}
+{"t": 1795683647.4278708, "src": "supervisor", "event": "kill", "incarnation": 6, "at": 5487.511449575424}
+{"t": 1795683647.4309468, "src": "supervisor", "event": "child_start", "incarnation": 7, "pid": 9078}
+{"t": 1795685039.8397462, "src": "supervisor", "event": "kill", "incarnation": 7, "at": 6886.63961315155}
+{"t": 1795685039.843313, "src": "supervisor", "event": "child_start", "incarnation": 8, "pid": 10129}
+{"t": 1795685126.4464495, "src": "supervisor", "event": "kill", "incarnation": 8, "at": 6975.344953775406}
+{"t": 1795685126.4471998, "src": "supervisor", "event": "child_start", "incarnation": 9, "pid": 10206}
+{"t": 1795685151.0168808, "src": "supervisor", "event": "kill", "incarnation": 9, "at": 7001.226151943207}
+{"t": 1795685151.0176058, "src": "supervisor", "event": "child_start", "incarnation": 10, "pid": 10233}
+{"t": 1795685354.3747032, "src": "supervisor", "event": "run_end", "reason": "duration", "elapsed": 7204.779699087143}

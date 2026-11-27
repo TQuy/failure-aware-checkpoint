@@ -1,0 +1,15 @@
+{"t": 1795730043.265114, "src": "supervisor", "event": "run_start", "duration": 7200.0, "kills": [969.3015713251997, 1361.285892044693, 3176.6849419413966, 3782.8739535031605, 4030.6637073721918, 5879.19471889458], "cmd": ["python3", "examples/train_gpt2.py", "--model", "gpt2-large", "--policy", "dcp:64", "--grad-ckpt", "--batch", "4", "--seq", "512", "--seed", "0", "--data-dir", "/home/quynt/data", "--ckpt-dir", "/mnt/store/ckpt--home-quynt-results-w13-seed4-m3600-dcp-64", "--record", "/home/quynt/results/w13-seed4/m3600/dcp-64/train.jsonl"]}
+{"t": 1795730043.2657895, "src": "supervisor", "event": "child_start", "incarnation": 0, "pid": 38270}
+{"t": 1795731014.0000162, "src": "supervisor", "event": "kill", "incarnation": 0, "at": 969.3017899990082}
+{"t": 1795731014.001738, "src": "supervisor", "event": "child_start", "incarnation": 1, "pid": 38994}
+{"t": 1795731407.0974448, "src": "supervisor", "event": "kill", "incarnation": 1, "at": 1361.2860915660858}
+{"t": 1795731407.0982177, "src": "supervisor", "event": "child_start", "incarnation": 2, "pid": 39306}
+{"t": 1795733221.5205438, "src": "supervisor", "event": "kill", "incarnation": 2, "at": 3176.6852140426636}
+{"t": 1795733221.5249236, "src": "supervisor", "event": "child_start", "incarnation": 3, "pid": 40660}
+{"t": 1795733827.0280828, "src": "supervisor", "event": "kill", "incarnation": 3, "at": 3782.8744049072266}
+{"t": 1795733827.0288622, "src": "supervisor", "event": "child_start", "incarnation": 4, "pid": 41126}
+{"t": 1795734074.138992, "src": "supervisor", "event": "kill", "incarnation": 4, "at": 4030.6638736724854}
+{"t": 1795734074.1398027, "src": "supervisor", "event": "child_start", "incarnation": 5, "pid": 41325}
+{"t": 1795735926.97333, "src": "supervisor", "event": "kill", "incarnation": 5, "at": 5879.195351600647}
+{"t": 1795735926.9782865, "src": "supervisor", "event": "child_start", "incarnation": 6, "pid": 42699}
+{"t": 1795737246.6904283, "src": "supervisor", "event": "run_end", "reason": "duration", "elapsed": 7203.425310373306}

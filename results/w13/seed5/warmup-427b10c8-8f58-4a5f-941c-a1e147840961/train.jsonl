@@ -1,0 +1,127 @@
+{"t": 1795685581.9130123, "src": "train", "event": "start", "incarnation": 0, "pid": 3007, "args": {"model": "gpt2-large", "policy": "none", "ckpt_dir": "/mnt/store/ckpt--home-quynt-results-w13-seed5-warmup-427b10c8-8f58-4a5f-941c-a1e147840961", "record": "/home/quynt/results/w13-seed5/warmup-427b10c8-8f58-4a5f-941c-a1e147840961/train.jsonl", "data_dir": "/home/quynt/data", "steps": 1000000000, "batch": 4, "seq": 512, "lr": 0.0001, "seed": 0, "grad_ckpt": true, "device": "cuda"}}
+{"t": 1795685601.484808, "src": "train", "event": "ready", "step": 0}
+{"t": 1795685605.9539783, "src": "train", "event": "loss", "step": 1, "loss": 11.094240188598633}
+{"t": 1795685605.954076, "src": "train", "event": "step_time", "step": 1, "seconds": 4.466814041137695, "writing": false}
+{"t": 1795685609.723827, "src": "train", "event": "loss", "step": 2, "loss": 9.882706642150879}
+{"t": 1795685609.723914, "src": "train", "event": "step_time", "step": 2, "seconds": 3.769718885421753, "writing": false}
+{"t": 1795685613.4965281, "src": "train", "event": "loss", "step": 3, "loss": 10.796615600585938}
+{"t": 1795685613.4966373, "src": "train", "event": "step_time", "step": 3, "seconds": 3.772585153579712, "writing": false}
+{"t": 1795685617.3099458, "src": "train", "event": "loss", "step": 4, "loss": 9.915672302246094}
+{"t": 1795685617.3100364, "src": "train", "event": "step_time", "step": 4, "seconds": 3.8132760524749756, "writing": false}
+{"t": 1795685621.1502342, "src": "train", "event": "loss", "step": 5, "loss": 9.733636856079102}
+{"t": 1795685621.1503222, "src": "train", "event": "step_time", "step": 5, "seconds": 3.8401684761047363, "writing": false}
+{"t": 1795685625.0400198, "src": "train", "event": "loss", "step": 6, "loss": 9.624286651611328}
+{"t": 1795685625.0401058, "src": "train", "event": "step_time", "step": 6, "seconds": 3.889667510986328, "writing": false}
+{"t": 1795685628.9408126, "src": "train", "event": "loss", "step": 7, "loss": 9.496439933776855}
+{"t": 1795685628.9409163, "src": "train", "event": "step_time", "step": 7, "seconds": 3.9006776809692383, "writing": false}
+{"t": 1795685632.8569357, "src": "train", "event": "loss", "step": 8, "loss": 9.241674423217773}
+{"t": 1795685632.8570347, "src": "train", "event": "step_time", "step": 8, "seconds": 3.915987730026245, "writing": false}
+{"t": 1795685636.7967575, "src": "train", "event": "loss", "step": 9, "loss": 9.211932182312012}
+{"t": 1795685636.796857, "src": "train", "event": "step_time", "step": 9, "seconds": 3.9396908283233643, "writing": false}
+{"t": 1795685640.7720437, "src": "train", "event": "loss", "step": 10, "loss": 9.068307876586914}
+{"t": 1795685640.7721395, "src": "train", "event": "step_time", "step": 10, "seconds": 3.975156784057617, "writing": false}
+{"t": 1795685644.7255876, "src": "train", "event": "loss", "step": 11, "loss": 8.913607597351074}
+{"t": 1795685644.7257001, "src": "train", "event": "step_time", "step": 11, "seconds": 3.953413248062134, "writing": false}
+{"t": 1795685648.7518814, "src": "train", "event": "loss", "step": 12, "loss": 8.876028060913086}
+{"t": 1795685648.7519863, "src": "train", "event": "step_time", "step": 12, "seconds": 4.026139974594116, "writing": false}
+{"t": 1795685652.8140063, "src": "train", "event": "loss", "step": 13, "loss": 8.573848724365234}
+{"t": 1795685652.8140998, "src": "train", "event": "step_time", "step": 13, "seconds": 4.0619895458221436, "writing": false}
+{"t": 1795685656.9190745, "src": "train", "event": "loss", "step": 14, "loss": 8.571539878845215}
+{"t": 1795685656.9191654, "src": "train", "event": "step_time", "step": 14, "seconds": 4.104944705963135, "writing": false}
+{"t": 1795685661.0413728, "src": "train", "event": "loss", "step": 15, "loss": 8.41485595703125}
+{"t": 1795685661.041474, "src": "train", "event": "step_time", "step": 15, "seconds": 4.122178316116333, "writing": false}
+{"t": 1795685665.2025824, "src": "train", "event": "loss", "step": 16, "loss": 8.509934425354004}
+{"t": 1795685665.202692, "src": "train", "event": "step_time", "step": 16, "seconds": 4.161077260971069, "writing": false}
+{"t": 1795685669.448375, "src": "train", "event": "loss", "step": 17, "loss": 8.213168144226074}
+{"t": 1795685669.4485266, "src": "train", "event": "step_time", "step": 17, "seconds": 4.2456488609313965, "writing": false}
+{"t": 1795685673.7465448, "src": "train", "event": "loss", "step": 18, "loss": 8.210128784179688}
+{"t": 1795685673.746655, "src": "train", "event": "step_time", "step": 18, "seconds": 4.2979817390441895, "writing": false}
+{"t": 1795685678.1247504, "src": "train", "event": "loss", "step": 19, "loss": 8.084053039550781}
+{"t": 1795685678.1248472, "src": "train", "event": "step_time", "step": 19, "seconds": 4.378064393997192, "writing": false}
+{"t": 1795685682.530294, "src": "train", "event": "loss", "step": 20, "loss": 8.440290451049805}
+{"t": 1795685682.5303848, "src": "train", "event": "step_time", "step": 20, "seconds": 4.405418157577515, "writing": false}
+{"t": 1795685686.960802, "src": "train", "event": "loss", "step": 21, "loss": 8.040074348449707}
+{"t": 1795685686.96091, "src": "train", "event": "step_time", "step": 21, "seconds": 4.4303879737854, "writing": false}
+{"t": 1795685691.406438, "src": "train", "event": "loss", "step": 22, "loss": 8.00391674041748}
+{"t": 1795685691.406534, "src": "train", "event": "step_time", "step": 22, "seconds": 4.44549822807312, "writing": false}
+{"t": 1795685695.9422593, "src": "train", "event": "loss", "step": 23, "loss": 7.821103572845459}
+{"t": 1795685695.9423966, "src": "train", "event": "step_time", "step": 23, "seconds": 4.535694599151611, "writing": false}
+{"t": 1795685700.5656393, "src": "train", "event": "loss", "step": 24, "loss": 7.9231486320495605}
+{"t": 1795685700.5657413, "src": "train", "event": "step_time", "step": 24, "seconds": 4.623207092285156, "writing": false}
+{"t": 1795685705.2563136, "src": "train", "event": "loss", "step": 25, "loss": 8.056971549987793}
+{"t": 1795685705.2564373, "src": "train", "event": "step_time", "step": 25, "seconds": 4.690539598464966, "writing": false}
+{"t": 1795685710.035728, "src": "train", "event": "loss", "step": 26, "loss": 7.89108419418335}
+{"t": 1795685710.0358143, "src": "train", "event": "step_time", "step": 26, "seconds": 4.779261589050293, "writing": false}
+{"t": 1795685714.923009, "src": "train", "event": "loss", "step": 27, "loss": 7.921766757965088}
+{"t": 1795685714.923107, "src": "train", "event": "step_time", "step": 27, "seconds": 4.887162208557129, "writing": false}
+{"t": 1795685719.9385736, "src": "train", "event": "loss", "step": 28, "loss": 7.966273784637451}
+{"t": 1795685719.938681, "src": "train", "event": "step_time", "step": 28, "seconds": 5.015434503555298, "writing": false}
+{"t": 1795685724.9670053, "src": "train", "event": "loss", "step": 29, "loss": 7.760356903076172}
+{"t": 1795685724.967115, "src": "train", "event": "step_time", "step": 29, "seconds": 5.028292894363403, "writing": false}
+{"t": 1795685730.0125701, "src": "train", "event": "loss", "step": 30, "loss": 7.631669521331787}
+{"t": 1795685730.012669, "src": "train", "event": "step_time", "step": 30, "seconds": 5.045424699783325, "writing": false}
+{"t": 1795685734.9924242, "src": "train", "event": "loss", "step": 31, "loss": 7.798847198486328}
+{"t": 1795685734.9925268, "src": "train", "event": "step_time", "step": 31, "seconds": 4.979726552963257, "writing": false}
+{"t": 1795685739.8742793, "src": "train", "event": "loss", "step": 32, "loss": 7.829963684082031}
+{"t": 1795685739.8743732, "src": "train", "event": "step_time", "step": 32, "seconds": 4.881725549697876, "writing": false}
+{"t": 1795685744.6866887, "src": "train", "event": "loss", "step": 33, "loss": 7.701061248779297}
+{"t": 1795685744.6867778, "src": "train", "event": "step_time", "step": 33, "seconds": 4.812286376953125, "writing": false}
+{"t": 1795685749.4494812, "src": "train", "event": "loss", "step": 34, "loss": 7.758488655090332}
+{"t": 1795685749.4495926, "src": "train", "event": "step_time", "step": 34, "seconds": 4.762671947479248, "writing": false}
+{"t": 1795685754.1712828, "src": "train", "event": "loss", "step": 35, "loss": 7.932229995727539}
+{"t": 1795685754.1713698, "src": "train", "event": "step_time", "step": 35, "seconds": 4.721663475036621, "writing": false}
+{"t": 1795685758.8721497, "src": "train", "event": "loss", "step": 36, "loss": 7.917182445526123}
+{"t": 1795685758.8722396, "src": "train", "event": "step_time", "step": 36, "seconds": 4.700735569000244, "writing": false}
+{"t": 1795685763.5578253, "src": "train", "event": "loss", "step": 37, "loss": 7.733986854553223}
+{"t": 1795685763.5579293, "src": "train", "event": "step_time", "step": 37, "seconds": 4.685558080673218, "writing": false}
+{"t": 1795685768.2351584, "src": "train", "event": "loss", "step": 38, "loss": 7.758796215057373}
+{"t": 1795685768.2352626, "src": "train", "event": "step_time", "step": 38, "seconds": 4.677201747894287, "writing": false}
+{"t": 1795685772.907779, "src": "train", "event": "loss", "step": 39, "loss": 7.581664562225342}
+{"t": 1795685772.9078746, "src": "train", "event": "step_time", "step": 39, "seconds": 4.672487258911133, "writing": false}
+{"t": 1795685777.5900018, "src": "train", "event": "loss", "step": 40, "loss": 7.742614269256592}
+{"t": 1795685777.5900965, "src": "train", "event": "step_time", "step": 40, "seconds": 4.682096481323242, "writing": false}
+{"t": 1795685782.3318949, "src": "train", "event": "loss", "step": 41, "loss": 7.798295021057129}
+{"t": 1795685782.3319933, "src": "train", "event": "step_time", "step": 41, "seconds": 4.7417707443237305, "writing": false}
+{"t": 1795685787.0372553, "src": "train", "event": "loss", "step": 42, "loss": 7.668745517730713}
+{"t": 1795685787.0373578, "src": "train", "event": "step_time", "step": 42, "seconds": 4.705232381820679, "writing": false}
+{"t": 1795685791.7536805, "src": "train", "event": "loss", "step": 43, "loss": 7.701037406921387}
+{"t": 1795685791.7537732, "src": "train", "event": "step_time", "step": 43, "seconds": 4.716289520263672, "writing": false}
+{"t": 1795685796.475361, "src": "train", "event": "loss", "step": 44, "loss": 7.740123748779297}
+{"t": 1795685796.475458, "src": "train", "event": "step_time", "step": 44, "seconds": 4.7215588092803955, "writing": false}
+{"t": 1795685801.2098112, "src": "train", "event": "loss", "step": 45, "loss": 7.715134143829346}
+{"t": 1795685801.2099075, "src": "train", "event": "step_time", "step": 45, "seconds": 4.73431134223938, "writing": false}
+{"t": 1795685805.9372244, "src": "train", "event": "loss", "step": 46, "loss": 7.490758895874023}
+{"t": 1795685805.9373164, "src": "train", "event": "step_time", "step": 46, "seconds": 4.727286338806152, "writing": false}
+{"t": 1795685810.6793633, "src": "train", "event": "loss", "step": 47, "loss": 7.530645370483398}
+{"t": 1795685810.6794536, "src": "train", "event": "step_time", "step": 47, "seconds": 4.742016315460205, "writing": false}
+{"t": 1795685815.432523, "src": "train", "event": "loss", "step": 48, "loss": 7.6056647300720215}
+{"t": 1795685815.4326205, "src": "train", "event": "step_time", "step": 48, "seconds": 4.7530295848846436, "writing": false}
+{"t": 1795685820.1897254, "src": "train", "event": "loss", "step": 49, "loss": 7.709142684936523}
+{"t": 1795685820.1898158, "src": "train", "event": "step_time", "step": 49, "seconds": 4.757077217102051, "writing": false}
+{"t": 1795685824.9449747, "src": "train", "event": "loss", "step": 50, "loss": 7.797226428985596}
+{"t": 1795685824.945087, "src": "train", "event": "step_time", "step": 50, "seconds": 4.755127191543579, "writing": false}
+{"t": 1795685829.7215166, "src": "train", "event": "loss", "step": 51, "loss": 7.531069755554199}
+{"t": 1795685829.7216027, "src": "train", "event": "step_time", "step": 51, "seconds": 4.776400804519653, "writing": false}
+{"t": 1795685834.5095406, "src": "train", "event": "loss", "step": 52, "loss": 7.679563999176025}
+{"t": 1795685834.5096338, "src": "train", "event": "step_time", "step": 52, "seconds": 4.787910223007202, "writing": false}
+{"t": 1795685839.2920787, "src": "train", "event": "loss", "step": 53, "loss": 7.655850410461426}
+{"t": 1795685839.2921684, "src": "train", "event": "step_time", "step": 53, "seconds": 4.78241491317749, "writing": false}
+{"t": 1795685844.1310806, "src": "train", "event": "loss", "step": 54, "loss": 7.681464672088623}
+{"t": 1795685844.1312015, "src": "train", "event": "step_time", "step": 54, "seconds": 4.838883876800537, "writing": false}
+{"t": 1795685848.9052072, "src": "train", "event": "loss", "step": 55, "loss": 7.838662624359131}
+{"t": 1795685848.9053652, "src": "train", "event": "step_time", "step": 55, "seconds": 4.773975849151611, "writing": false}
+{"t": 1795685853.6665611, "src": "train", "event": "loss", "step": 56, "loss": 7.587253093719482}
+{"t": 1795685853.6666431, "src": "train", "event": "step_time", "step": 56, "seconds": 4.76116418838501, "writing": false}
+{"t": 1795685858.4307003, "src": "train", "event": "loss", "step": 57, "loss": 7.635423183441162}
+{"t": 1795685858.4307885, "src": "train", "event": "step_time", "step": 57, "seconds": 4.764032602310181, "writing": false}
+{"t": 1795685863.2009737, "src": "train", "event": "loss", "step": 58, "loss": 7.460055351257324}
+{"t": 1795685863.2010677, "src": "train", "event": "step_time", "step": 58, "seconds": 4.770157337188721, "writing": false}
+{"t": 1795685867.9641519, "src": "train", "event": "loss", "step": 59, "loss": 7.5393290519714355}
+{"t": 1795685867.964244, "src": "train", "event": "step_time", "step": 59, "seconds": 4.7630534172058105, "writing": false}
+{"t": 1795685872.7181654, "src": "train", "event": "loss", "step": 60, "loss": 7.604978561401367}
+{"t": 1795685872.7182558, "src": "train", "event": "step_time", "step": 60, "seconds": 4.753892660140991, "writing": false}
+{"t": 1795685877.4722333, "src": "train", "event": "loss", "step": 61, "loss": 7.2541327476501465}
+{"t": 1795685877.4723184, "src": "train", "event": "step_time", "step": 61, "seconds": 4.7539520263671875, "writing": false}
+{"t": 1795685882.223878, "src": "train", "event": "loss", "step": 62, "loss": 7.484386444091797}
+{"t": 1795685882.2239583, "src": "train", "event": "step_time", "step": 62, "seconds": 4.751529693603516, "writing": false}
+{"t": 1795685882.2239785, "src": "train", "event": "stopped", "step": 62}

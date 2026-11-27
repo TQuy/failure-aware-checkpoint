@@ -1,0 +1,11 @@
+{"t": 1795683567.3692052, "src": "supervisor", "event": "run_start", "duration": 7200.0, "kills": [2811.9103696287566, 5469.789914948275, 5522.181938459798, 5602.004133200771], "cmd": ["python3", "examples/train_gpt2.py", "--model", "gpt2-large", "--policy", "checkfreq:0.05", "--grad-ckpt", "--batch", "4", "--seq", "512", "--seed", "0", "--data-dir", "/home/quynt/data", "--ckpt-dir", "/mnt/store/ckpt--home-quynt-results-w13-seed2-m900-checkfreq-0-05", "--record", "/home/quynt/results/w13-seed2/m900/checkfreq-0-05/train.jsonl"]}
+{"t": 1795683567.3699808, "src": "supervisor", "event": "child_start", "incarnation": 0, "pid": 10203}
+{"t": 1795686387.3715718, "src": "supervisor", "event": "kill", "incarnation": 0, "at": 2811.9108567237854}
+{"t": 1795686387.3762898, "src": "supervisor", "event": "child_start", "incarnation": 1, "pid": 12308}
+{"t": 1795689046.1552641, "src": "supervisor", "event": "kill", "incarnation": 1, "at": 5469.7904596328735}
+{"t": 1795689046.156759, "src": "supervisor", "event": "child_start", "incarnation": 2, "pid": 14264}
+{"t": 1795689089.7495146, "src": "supervisor", "event": "kill", "incarnation": 2, "at": 5522.1824107170105}
+{"t": 1795689089.7502697, "src": "supervisor", "event": "child_start", "incarnation": 3, "pid": 14306}
+{"t": 1795689172.8598998, "src": "supervisor", "event": "kill", "incarnation": 3, "at": 5602.004282951355}
+{"t": 1795689172.8615122, "src": "supervisor", "event": "child_start", "incarnation": 4, "pid": 14377}
+{"t": 1795690779.572474, "src": "supervisor", "event": "run_end", "reason": "duration", "elapsed": 7212.203265666962}
